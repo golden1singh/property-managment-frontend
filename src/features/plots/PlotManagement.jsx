@@ -1,0 +1,299 @@
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+  PlusIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  BuildingOfficeIcon
+} from '@heroicons/react/24/outline'
+import axiosInstance from '../../utils/axios';
+
+const PlotManagement = () => {
+  const { t } = useTranslation()
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [editingPlot, setEditingPlot] = useState(null)
+  
+  const [formData, setFormData] = useState({
+    plotNumber: '',
+    address: '',
+    totalRooms: '',
+    description: ''
+  })
+
+  // Sample data - replace with API data
+  const [plots, setPlots] = useState([
+    {
+      id: 1,
+      plotNumber: '129',
+      address: '123 Main Street, City',
+      totalRooms: 6,
+      occupiedRooms: 4,
+      description: 'Two story building'
+    },
+    {
+      id: 2,
+      plotNumber: '130',
+      address: '456 Park Avenue, City',
+      totalRooms: 8,
+      occupiedRooms: 6,
+      description: 'Three story building'
+    }
+  ])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   if (editingPlot) {
+  //     // Update existing plot
+  //     setPlots(plots.map(plot => 
+  //       plot.id === editingPlot.id 
+  //         ? { ...plot, ...formData }
+  //         : plot
+  //     ))
+  //   } else {
+  //     // Add new plot
+  //     setPlots([...plots, {
+  //       id: Date.now(),
+  //       ...formData,
+  //       occupiedRooms: 0
+  //     }])
+  //   }
+  //   resetForm()
+  // }
+
+  const handleEdit = (plot) => {
+    setEditingPlot(plot)
+    setFormData({
+      plotNumber: plot.plotNumber,
+      address: plot.address,
+      totalRooms: plot.totalRooms,
+      description: plot.description
+    })
+    setShowAddForm(true)
+  }
+
+  // const handleDelete = (plotId) => {
+  //   if (window.confirm(t('plots.deleteConfirmation'))) {
+  //     setPlots(plots.filter(plot => plot.id !== plotId))
+  //   }
+  // }
+
+  const resetForm = () => {
+    setFormData({
+      plotNumber: '',
+      address: '',
+      totalRooms: '',
+      description: ''
+    })
+    setEditingPlot(null)
+    setShowAddForm(false)
+  }
+// In your PlotManagement component
+const [loading, setLoading] = useState(false);
+
+// Fetch plots
+const fetchPlots = async () => {
+  try {
+    setLoading(true);
+    const response = await axiosInstance.get('/api/plots');
+    setPlots(response.data);
+  } catch (error) {
+    console.error('Error fetching plots:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+// Add/Update plot
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    if (editingPlot) {
+      await axiosInstance.patch(`/api/plots/${editingPlot.id}`, formData);
+    } else {
+      await axiosInstance.post('/api/plots', formData);
+    }
+    fetchPlots();
+    resetForm();
+  } catch (error) {
+    console.error('Error saving plot:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+// Delete plot
+const handleDelete = async (plotId) => {
+  if (window.confirm(t('plots.deleteConfirmation'))) {
+    try {
+      await axiosInstance.delete(`/api/plots/${plotId}`);
+      fetchPlots();
+    } catch (error) {
+      console.error('Error deleting plot:', error);
+    }
+  }
+};
+
+// Fetch plots on component mount
+useEffect(() => {
+  fetchPlots();
+}, []);
+  return (
+    <div className="py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            {t('plots.title')}
+          </h1>
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700"
+          >
+            <PlusIcon className="-ml-1 mr-2 h-5 w-5" />
+            {t('plots.addPlot')}
+          </button>
+        </div>
+
+        {/* Add/Edit Form */}
+        {showAddForm && (
+          <div className="mt-6 bg-white shadow sm:rounded-lg">
+            <div className="px-4 py-5 sm:p-6">
+              <h3 className="text-lg font-medium text-gray-900">
+                {editingPlot ? t('plots.editPlot') : t('plots.addNewPlot')}
+              </h3>
+              <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="plotNumber" className="block text-sm font-medium text-gray-700">
+                      {t('plots.plotNumber')}
+                    </label>
+                    <input
+                      type="text"
+                      name="plotNumber"
+                      id="plotNumber"
+                      required
+                      value={formData.plotNumber}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="totalRooms" className="block text-sm font-medium text-gray-700">
+                      {t('plots.totalRooms')}
+                    </label>
+                    <input
+                      type="number"
+                      name="totalRooms"
+                      id="totalRooms"
+                      required
+                      value={formData.totalRooms}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                      {t('plots.address')}
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      id="address"
+                      required
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                      {t('plots.description')}
+                    </label>
+                    <textarea
+                      name="description"
+                      id="description"
+                      rows={3}
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                  >
+                    {t('common.cancel')}
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700"
+                  >
+                    {editingPlot ? t('common.update') : t('common.save')}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Plots List */}
+        <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-lg">
+          <ul className="divide-y divide-gray-200">
+            {plots.map((plot) => (
+              <li key={plot.id} className="px-4 py-4 sm:px-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <BuildingOfficeIcon className="h-6 w-6 text-gray-400" />
+                    <div className="ml-4">
+                      <p className="text-sm font-medium text-gray-900">
+                        {t('plots.plotNumber')}: {plot.plotNumber}
+                      </p>
+                      <p className="text-sm text-gray-500">{plot.address}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="text-sm text-gray-500">
+                      {plot.occupiedRooms}/{plot.totalRooms} {t('plots.roomsOccupied')}
+                    </div>
+                    <button
+                      onClick={() => handleEdit(plot)}
+                      className="text-primary-600 hover:text-primary-900"
+                    >
+                      <PencilSquareIcon className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(plot.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+                {plot.description && (
+                  <p className="mt-2 text-sm text-gray-500">{plot.description}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default PlotManagement 
