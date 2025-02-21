@@ -734,5 +734,15 @@
     "utility": "Utility",
     "deposit": "Deposit",
     "maintenance": "Maintenance"
-  }
+  },
+  "email": "Email",
+  "emailPlaceholder": "Enter your email",
+  "password": "Password",
+  "passwordPlaceholder": "Enter your password",
+  "register": "Register",
+  "forgotPassword": "Forgot Password?",
+  "demoAccess": "Demo Access",
+  "demoCredentials": "Demo Credentials"
+
+  
 } 

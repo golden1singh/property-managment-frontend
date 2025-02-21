@@ -128,7 +128,7 @@ const handleAmenityToggle = (amenity) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-  debugger
+
   navigate('/rooms');
       toast.success(t('roomAddedSuccess'));
     } catch (error) {

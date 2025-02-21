@@ -532,5 +532,18 @@
     "title": "ओह! कुछ गलत हो गया",
     "message": "हम आपकी दुःखदायी हैं। कृपया पृष्ठ रीफ्रेश करें या समस्या जारी रहती है तो समर्थन से संपर्क करें।",
     "refresh": "पृष्ठ रीफ्रेश करें"
+  },
+  "emailPlaceholder": "आपका ईमेल दर्ज करें",
+  "password": "पासवर्ड",
+  "passwordPlaceholder": "आपका पासवर्ड दर्ज करें",
+  "register": "रजिस्टर करें",
+  "forgotPassword": "पासवर्ड भूल गए?",
+  "demoAccess": "डेमो प्रबंधन",
+  "demoCredentials": "डेमो प्रबंधन के लिए प्रबंधन का उपयोग करें",
+  "stats": {
+    "activeUsers": "सक्रिय उपयोगकर्ता",
+    "propertiesManaged": "प्रबंधित संपत्तियां",
+    "monthlyTransactions": "मासिक लेनदेन",
+    "customerSatisfaction": "ग्राहक संतुष्टि"
   }
 }

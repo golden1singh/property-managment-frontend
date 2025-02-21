@@ -130,10 +130,10 @@ const RoomList = () => {
                 selectedPlot,
                 (e) => setSelectedPlot(e.target.value),
                 <>
-                  <option value="all">{t('allPlots')}</option>
+                  <option value="all" disabled>{t('allPlots')}</option>
                   {plots.map(plot => (
                     <option key={plot._id} value={plot.plotNumber} className='text-black-600'>
-                      {t('plotWithNumber', { number: plot.plotNumber })}
+                      {t('plotNumber')} {`${plot.plotNumber}`}
                     </option>
                   ))}
                 </>

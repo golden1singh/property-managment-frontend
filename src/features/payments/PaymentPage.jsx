@@ -77,7 +77,7 @@ const PaymentPage = () => {
 
   const fetchPayments = async () => {
     try {
-      debugger
+    
       setLoading(true)
       const response = await axiosInstance.get('/api/payments', {
         params: {

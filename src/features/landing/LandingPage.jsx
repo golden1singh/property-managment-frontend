@@ -10,6 +10,7 @@ import {
   DocumentChartBarIcon,
   LanguageIcon
 } from '@heroicons/react/24/outline'
+import userIcon from '../../assets/userIcon.jpg'
 
 const LandingPage = () => {
   const { t, i18n } = useTranslation()
@@ -57,7 +58,7 @@ const LandingPage = () => {
   const stats = [
     { id: 1, name: t('stats.activeUsers'), value: '2,000+' },
     { id: 2, name: t('stats.propertiesManaged'), value: '5,000+' },
-    { id: 3, name: t('stats.monthlyTransactions'), value: '₹1M+' },
+    { id: 3, name: t('stats.monthlyTransactions'), value: '₹50K+' },
     { id: 4, name: t('stats.customerSatisfaction'), value: '98%' }
   ]
 
@@ -66,13 +67,13 @@ const LandingPage = () => {
       content: t('testimonials.testimonial1.content'),
       author: t('testimonials.testimonial1.author'),
       role: t('testimonials.testimonial1.role'),
-      image: '/images/testimonial1.jpg'
+      image: userIcon
     },
     {
       content: t('testimonials.testimonial2.content'),
       author: t('testimonials.testimonial2.author'),
       role: t('testimonials.testimonial2.role'),
-      image: '/images/testimonial2.jpg'
+      image: userIcon
     }
   ]
 
@@ -281,7 +282,7 @@ const LandingPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900" aria-labelledby="footer-heading">
+      {/* <footer className="bg-gray-900" aria-labelledby="footer-heading">
         <h2 id="footer-heading" className="sr-only">
           Footer
         </h2>
@@ -338,7 +339,7 @@ const LandingPage = () => {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   )
 }

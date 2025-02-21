@@ -121,7 +121,7 @@ const AddTenant = () => {
   };
 
   const handleSubmit = async (e) => {
-    debugger
+  
     e.preventDefault();
     if (!validateForm(formData)) return;
 
