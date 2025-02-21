@@ -1,5 +1,5 @@
 {
-  "appName": "Property Manager",
+  "appName": "Ashiyana",
   "dashboard": "Dashboard",
   "rooms": "Rooms",
   "tenants": "Tenants",
@@ -173,12 +173,7 @@
   "guides": "Guides",
   "allRightsReserved": "All rights reserved",
   "login": "Login",
-  "stats": {
-    "activeUsers": "Active Users",
-    "propertiesManaged": "Properties Managed",
-    "monthlyTransactions": "Monthly Transactions",
-    "customerSatisfaction": "Customer Satisfaction"
-  },
+ 
   "features": {
     "title": "Everything you need",
     "subtitle": "Manage your properties with ease",
@@ -680,7 +675,16 @@
     "fileTooLarge": "File size should be less than 10MB",
     "invalidFileType": "Please upload an image file",
     "fetchReadingDetails": "Error fetching reading details",
-    "markAsPaid": "Error marking bill as paid"
+    "markAsPaid": "Error marking bill as paid",
+    "fetchReadings": "Error fetching readings",
+    "fetchPayments": "Error fetching payments",
+    "fetchTenants": "Error fetching tenants",
+    "addPayment": "Error recording payment",
+    "fetchPayments": "Error fetching payments",
+    "fetchTenants": "Error fetching tenants",
+    "addPayment": "Error recording payment",
+    "invalidFileType": "Please upload a PDF or image file"
+  
   },
   "roomNumber": "Room {{number}}",
   "notesPlaceholder": "Add any additional notes about this payment...",
@@ -692,12 +696,7 @@
   "success": {
     "paymentAdded": "Payment recorded successfully"
   },
-  "errors": {
-    "fetchPayments": "Error fetching payments",
-    "fetchTenants": "Error fetching tenants",
-    "addPayment": "Error recording payment",
-    "invalidFileType": "Please upload a PDF or image file"
-  },
+
   "pagination": {
     "previous": "Previous",
     "next": "Next",
@@ -742,7 +741,13 @@
   "register": "Register",
   "forgotPassword": "Forgot Password?",
   "demoAccess": "Demo Access",
-  "demoCredentials": "Demo Credentials"
+  "demoCredentials": "Demo Credentials",
+  "stats": {
+    "activeUsers": "Active Users",
+    "propertiesManaged": "Properties Managed",
+    "monthlyTransactions": "Monthly Transactions",
+    "customerSatisfaction": "Customer Satisfaction"
+  }
 
   
 } 

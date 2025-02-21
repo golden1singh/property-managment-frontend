@@ -8,9 +8,11 @@ import {
   ChartBarIcon,
   ShieldCheckIcon,
   DocumentChartBarIcon,
-  LanguageIcon
+  LanguageIcon,
+  UserIcon
 } from '@heroicons/react/24/outline'
 import userIcon from '../../assets/userIcon.jpg'
+import logo from '../../assets/logo.png'
 
 const LandingPage = () => {
   const { t, i18n } = useTranslation()
@@ -80,23 +82,45 @@ const LandingPage = () => {
   return (
     <div className="bg-white">
       {/* Navigation */}
-      <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 shadow-sm">
+      <nav className="fixed w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0">
-              <span className="text-2xl font-bold text-primary-600">{t('appName')}</span>
+            {/* Logo and Brand */}
+            <div className="flex items-center">
+              <img 
+                src={logo} 
+                alt={t('appName')} 
+                className="h-16 w-auto object-contain" 
+                style={{ filter: 'brightness(0) saturate(100%)' }}
+              />
             </div>
+
+            {/* Right Side Actions */}
             <div className="flex items-center space-x-4">
+              {/* Language Switcher */}
               <button
                 onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'hi' : 'en')}
-                className="p-2 rounded-full hover:bg-gray-100"
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 
+                  group relative flex items-center"
+                aria-label="Switch Language"
               >
-                <LanguageIcon className="h-6 w-6 text-gray-600" />
+                <LanguageIcon className="h-5 w-5 text-gray-600 group-hover:text-primary-600" />
+                <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 
+                  bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 
+                  group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                  {i18n.language === 'en' ? 'हिंदी' : 'English'}
+                </span>
               </button>
+
+              {/* Login Button */}
               <button
                 onClick={() => navigate('/login')}
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex items-center px-5 py-2 border border-transparent 
+                  rounded-lg text-sm font-medium text-white 
+                  bg-primary-600 hover:bg-primary-700
+                  transition-colors duration-200"
               >
+                <UserIcon className="h-4 w-4 mr-2" />
                 {t('login')}
               </button>
             </div>

@@ -1,5 +1,5 @@
 {
-  "appName": "प्रॉपर्टी मैनेजर",
+  "appName": "आशियाना",
   "login": "लॉग इन",
   "dashboard": "डैशबोर्ड",
   "rooms": "कमरे",
@@ -503,7 +503,13 @@
     "fetchPlots": "प्लॉट लाने में गलती",
     "fetchRooms": "कमरे लाने में गलती",
     "fileTooLarge": "फाइल का आकार 10MB से कम होना चाहिए",
-    "invalidFileType": "कृपया एक इमेज फाइल (JPG, PNG, आदि) अपलोड करें"
+    "invalidFileType": "कृपया एक इमेज फाइल (JPG, PNG, आदि) अपलोड करें",
+    "fetchReadingDetails": "Error fetching reading details",
+    "markAsPaid": "बिल को भुगतान करने में गलती",
+    "fetchReadings": "रीडिंग लाने में गलती",
+    "fetchPayments": "भुगतान लाने में गलती",
+    "fetchTenants": "किरायेदार लाने में गलती",
+    "addPayment": "भुगतान रिकॉर्ड करने में गलती"
   },
   "pagination": {
     "previous": "पिछला",

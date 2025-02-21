@@ -53,9 +53,9 @@ const LoginPage = () => {
           <h1 className="text-4xl font-bold tracking-tight mb-2 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
             {t('appName')}
           </h1>
-          <p className="text-lg text-gray-600 font-medium">
+          {/* <p className="text-lg text-gray-600 font-medium">
             {t('propertyManagement')}
-          </p>
+          </p> */}
         </div>
 
         {/* Login Card */}

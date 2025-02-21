@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition, RadioGroup } from '@headlessui/react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -11,18 +11,25 @@ import {
   SunIcon,
   MoonIcon,
   Cog6ToothIcon,
-  CheckIcon
+  CheckIcon,
+  ChevronRightIcon,
+  UserIcon
 } from '@heroicons/react/24/outline'
 import { useTheme } from '../../contexts/ThemeContext'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../features/auth/authSlice'
+import MobileHeader from '../layout/MobileHeader'
+import { navigation as navigationlist } from './GlobalText'
+import React from 'react'
+
 const Header = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const location = useLocation()
   const { theme, setTheme } = useTheme()
   const { i18n, languages } = useLanguage()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigation = [
     { name: t('dashboard'), href: '/dashboard', current: location.pathname === '/dashboard' },
@@ -240,28 +247,48 @@ const Header = () => {
                     )}
                   </Disclosure.Button>
                 </div>
+               
               </div>
             </div>
 
             {/* Mobile menu */}
-            <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 pb-3 pt-2">
-                {navigation.map((item) => (
+            <Disclosure.Panel className="sm:hidden bg-white border-t border-gray-200">
+              <div className="space-y-1 py-2">
+                {navigationlist.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as={Link}
                     to={item.href}
-                    className={`block py-2 pl-3 pr-4 text-base font-medium ${
+                    className={`flex items-center w-full px-4 py-3 text-base font-medium transition-colors duration-200 ${
                       item.current
-                        ? 'bg-primary-50 dark:bg-primary-900 border-l-4 border-primary-500 text-primary-700 dark:text-primary-400'
-                        : 'text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-100'
+                        ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-500'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-primary-600 border-l-4 border-transparent'
                     }`}
                   >
-                    {item.name}
+                    {/* Icon - Render as a component */}
+                    <span className={`mr-3 ${item.current ? 'text-primary-500' : 'text-gray-400'}`}>
+                      {React.createElement(item.icon, { className: 'h-5 w-5' })}
+                    </span>
+                    
+                    {/* Name in Sentence Case */}
+                    <span>
+                      {item.name.charAt(0).toUpperCase() + 
+                       item.name.slice(1).toLowerCase()}
+                    </span>
+                    
+                    {/* Active indicator */}
+                    {item.current && (
+                      <span className="ml-auto">
+                        <ChevronRightIcon className="h-5 w-5 text-primary-500" />
+                      </span>
+                    )}
                   </Disclosure.Button>
                 ))}
               </div>
+
+              
             </Disclosure.Panel>
+             {/* <MobileHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
           </>
         )}
       </Disclosure>

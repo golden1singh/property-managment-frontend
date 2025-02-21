@@ -62,7 +62,7 @@ const DashboardLayout = ({ children }) => {
       {/* Main content */}
       <div className="lg:pl-64 flex flex-col flex-1">
         {/* Mobile top bar */}
-        <div className="sticky top-0 z-10 lg:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-100 dark:bg-dark-bg">
+        {/* <div className="sticky top-0 z-10 lg:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-100 dark:bg-dark-bg">
           <button
             type="button"
             className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
@@ -70,7 +70,7 @@ const DashboardLayout = ({ children }) => {
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
-        </div>
+        </div> */}
 
         {/* Main content wrapper */}
         <main className="flex-1">
