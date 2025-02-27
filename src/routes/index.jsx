@@ -1,32 +1,39 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DashboardLayout from "../components/layout/DashboardLayout";
 
-// Pages
-import LoginPage from "../features/auth/LoginPage";
-import LandingPage from "../features/landing/LandingPage";
-import Dashboard from "../features/dashboard/Dashboard";
-import PaymentPage from "../features/payments/PaymentPage";
-import RoomList from "../features/rooms/RoomList";
-import AddRoom from "../features/rooms/AddRoom";
-import TenantList from "../features/tenants/TenantListB";
-import AddTenant from "../features/tenants/AddTenant";
-import EditTenant from "../features/tenants/EditTenant";
-import TenantDetails from "../features/tenants/TenantDetails";
-import ReportsPage from "../features/reports/ReportsPage";
-import UtilitiesPage from "../features/utilities/UtilitiesPage";
-import NotFound from "../components/common/NotFound";
-import SettingsPage from "../features/settings/SettingsPage";
-import AddReading from "../features/readings/AddReading";
-import ReadingList from '../features/readings/ReadingList'
-import PlotManagement from "../features/plots/PlotManagement";
-import RoomDetail from '../features/rooms/RoomDetail'
-import EditRoom from '../features/rooms/EditRoom'
-import ReadingDetails from "../features/readings/ReadingDetails";
-import RentCollectionList from "../components/RentCollection/RentCollectionList";
-// import TenantDashboard from "../components/Dashboard/TenantDashboard";
+// Loading Component
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
+  </div>
+);
 
-// Protected Route - redirects to login if not authenticated
+// Lazy load components
+const LoginPage = lazy(() => import("../features/auth/LoginPage"));
+const LandingPage = lazy(() => import("../features/landing/LandingPage"));
+const Dashboard = lazy(() => import("../features/dashboard/Dashboard"));
+const PaymentPage = lazy(() => import("../features/payments/PaymentPage"));
+const RoomList = lazy(() => import("../features/rooms/RoomList"));
+const AddRoom = lazy(() => import("../features/rooms/AddRoom"));
+const TenantList = lazy(() => import("../features/tenants/TenantListB"));
+const AddTenant = lazy(() => import("../features/tenants/AddTenant"));
+const EditTenant = lazy(() => import("../features/tenants/EditTenant"));
+const TenantDetails = lazy(() => import("../features/tenants/TenantDetails"));
+const ReportsPage = lazy(() => import("../features/reports/ReportsPage"));
+const UtilitiesPage = lazy(() => import("../features/utilities/UtilitiesPage"));
+const NotFound = lazy(() => import("../components/common/NotFound"));
+const SettingsPage = lazy(() => import("../features/settings/SettingsPage"));
+const AddReading = lazy(() => import("../features/readings/AddReading"));
+const ReadingList = lazy(() => import("../features/readings/ReadingList"));
+const PlotManagement = lazy(() => import("../features/plots/PlotManagement"));
+const RoomDetail = lazy(() => import("../features/rooms/RoomDetail"));
+const EditRoom = lazy(() => import("../features/rooms/EditRoom"));
+const ReadingDetails = lazy(() => import("../features/readings/ReadingDetails"));
+const RentCollectionList = lazy(() => import("../components/RentCollection/RentCollectionList"));
+
+// Protected Route with Suspense
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const location = useLocation();
@@ -35,27 +42,31 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 
-  return <DashboardLayout>{children}</DashboardLayout>;
+  return (
+    <DashboardLayout>
+      <Suspense fallback={<LoadingSpinner />}>
+        {children}
+      </Suspense>
+    </DashboardLayout>
+  );
 };
 
-// Public Route - redirects to dashboard if authenticated
+// Public Route with Suspense
 const PublicRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const location = useLocation();
 
   if (isAuthenticated) {
-    // Redirect to the page they were trying to visit or dashboard
     return (
       <Navigate to={location.state?.from?.pathname || "/dashboard"} replace />
     );
   }
 
-  return children;
+  return <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>;
 };
 
 const AppRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  console.log({isAuthenticated})
 
   return (
     <Routes>
@@ -83,7 +94,6 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
-            {/* <TenantDashboard /> */}
           </ProtectedRoute>
         }
       />
@@ -120,8 +130,8 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-          </Route>
-          
+      </Route>
+      
       {/* Plot Routes */}
       <Route
         path="/plots"
@@ -195,8 +205,8 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-          </Route>
-          <Route
+      </Route>
+      <Route
         path="/readings"
         element={
           <ProtectedRoute>
