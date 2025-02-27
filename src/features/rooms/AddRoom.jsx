@@ -28,12 +28,14 @@ const AddRoom = () => {
     furnishingStatus: 'unfurnished', // unfurnished, semi-furnished, fully-furnished
     amenities: [],
     description: '',
-    status: 'available' // available, occupied, maintenance
+    status: 'available', // available, occupied, maintenance
+    plotId: ''
   });
 
   const amenitiesOptions = [
    'fan', 'bathroom', 'balcony', 'kitchen',  'water','tap','kitchen_sink','mirror_window'
   ];
+  console.log(plotsData,formData?.plotNumber,formData?.plotId)
 
   // Fetch plots on component mount
   const fetchPlots = async () => {
@@ -62,6 +64,7 @@ const AddRoom = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value)
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -98,6 +101,17 @@ const handleAmenityToggle = (amenity) => {
       }
       return filtered;
     });
+  };
+
+  const handlePlotChange = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const plotId = selectedOption.getAttribute('data-plot-id');
+    
+    setFormData(prev => ({
+      ...prev,
+      plotNumber: e.target.value,
+      // plotId: e.target.value
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -239,13 +253,13 @@ const handleAmenityToggle = (amenity) => {
                   t('plotNumber'),
                   <>
                     <option value="">{t('selectPlot')}</option>
-                    {plotsData.map(plot => (
-                      <option key={plot._id} value={plot.plotNumber}>
-                        {t('plotWithRooms', { 
-                          number: plot.plotNumber, 
-                          available: plot.totalRooms - plot.occupiedRooms, 
-                          total: plot.totalRooms 
-                        })}
+                    {plotsData?.map(plot => (
+                      <option 
+                        key={plot.id} 
+                        value={plot.id}
+                        data-plot-id={plot.id}
+                      >
+                        {`Plot ${plot.plotNumber} (${plot.totalRooms - plot.occupiedRooms}/${plot.totalRooms} rooms)`}
                       </option>
                     ))}
                   </>,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../utils/axios';
 import { toast } from 'react-toastify';
@@ -22,6 +22,8 @@ const ReadingDetails = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { paymentId, tenantId, roomId, paymentData } = location.state;
   const [loading, setLoading] = useState(true);
   const [reading, setReading] = useState(null);
   const [processingPayment, setProcessingPayment] = useState(false);

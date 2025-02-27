@@ -6,7 +6,8 @@ import {
     KeyIcon,
     BeakerIcon,
     BanknotesIcon,
-    Cog6ToothIcon
+    Cog6ToothIcon,
+    ReceiptRefundIcon
   } from '@heroicons/react/24/outline'
 export const navigation = [
     {
@@ -38,6 +39,11 @@ export const navigation = [
       name: 'payments',
       href: '/payments',
       icon: BanknotesIcon
+    },
+    {
+      name: 'rentCollection',
+      href: '/rent-collection',
+      icon: ReceiptRefundIcon
     },
     {
       name: 'settings',

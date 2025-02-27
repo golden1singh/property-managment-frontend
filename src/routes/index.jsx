@@ -23,6 +23,7 @@ import PlotManagement from "../features/plots/PlotManagement";
 import RoomDetail from '../features/rooms/RoomDetail'
 import EditRoom from '../features/rooms/EditRoom'
 import ReadingDetails from "../features/readings/ReadingDetails";
+import RentCollectionList from "../components/RentCollection/RentCollectionList";
 // import TenantDashboard from "../components/Dashboard/TenantDashboard";
 
 // Protected Route - redirects to login if not authenticated
@@ -219,6 +220,16 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/rent-collection">
+        <Route
+          index
+          element={
+            <ProtectedRoute>
+              <RentCollectionList />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
       
       <Route path="/settings">
         <Route

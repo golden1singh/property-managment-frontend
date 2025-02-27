@@ -91,7 +91,29 @@
   "occupiedRooms": "Occupied Rooms",
   "pendingRent": "Pending Rent",
   "pendingUtilities": "Pending Utilities",
-  "rentCollection": "Rent Collection",
+  "rentCollection": {
+    "title": "Rent Collection",
+    "totalAmount": "Total Amount",
+    "collected": "Collected",
+    "pending": "Pending",
+    "month": "Month",
+    "status": "Status",
+    "searchPlaceholder": "Search tenant or room",
+    "room": "Room",
+    "tenant": "Tenant",
+    "amount": "Amount",
+    "dueDate": "Due Date",
+    "actions": "Actions",
+    "collect": "Collect",
+    "view": "View",
+    "statuses": {
+      "all": "All Status",
+      "paid": "Paid",
+      "pending": "Pending",
+      "overdue": "Overdue"
+    },
+    "noPayments": "No payments found"
+  },
   "recentActivities": "Recent Activities",
   "alerts": "Alerts",
   "view": "View",
@@ -365,7 +387,8 @@
     "reports": "Reports",
     "utilities": "Utilities",
     "settingsBar": "Settings",
-    "readingsBar": "Readings"
+    "readingsBar": "Readings",
+    "rentCollection": "Rent Collection"
   },
   "addRoomTitle": "Add New Room",
   "roomBasicInfo": "Basic Information",
@@ -522,7 +545,8 @@
     "tenants": "Tenants",
     "readings": "Readings",
     "payments": "Payments",
-    "settings": "Settings"
+    "settings": "Settings",
+    "rentCollection": "Rent Collection"
   },
   "common": {
     "save": "Save",
@@ -683,8 +707,9 @@
     "fetchPayments": "Error fetching payments",
     "fetchTenants": "Error fetching tenants",
     "addPayment": "Error recording payment",
-    "invalidFileType": "Please upload a PDF or image file"
-  
+    "invalidFileType": "Please upload a PDF or image file",
+    "generateTestEntries": "Failed to generate test entries",
+    "fetchPayments": "Failed to fetch payments"
   },
   "roomNumber": "Room {{number}}",
   "notesPlaceholder": "Add any additional notes about this payment...",
@@ -707,12 +732,7 @@
     "showing": "Showing",
     "to": "to"
   },
-  "stats": {
-    "total": "Total",
-    "pending": "Pending",
-    "overdue": "Overdue",
-    "completed": "Completed"
-  },
+ 
   "markComplete": "Mark as Paid",
   "markOverdue": "Mark as Overdue",
   "markPending": "Mark as Pending",
@@ -746,8 +766,15 @@
     "activeUsers": "Active Users",
     "propertiesManaged": "Properties Managed",
     "monthlyTransactions": "Monthly Transactions",
-    "customerSatisfaction": "Customer Satisfaction"
-  }
+    "customerSatisfaction": "Customer Satisfaction",
+    "total": "Total",
+    "pending": "Pending",
+    "overdue": "Overdue",
+    "completed": "Completed"
+  },
+
+  "sendReminder": "Send Reminder",
+  "sendPaymentReminder": "Send payment reminder to tenant"
 
   
 } 

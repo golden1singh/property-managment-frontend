@@ -159,6 +159,7 @@ const AddTenant = () => {
       });
 
       toast.success(t('tenantAddedSuccess'));
+      console.log({response})
       navigate(`/tenants/${response.data._id}`);
     } catch (error) {
       console.error('Error adding tenant:', error);
@@ -345,7 +346,7 @@ const AddTenant = () => {
                   label={t('selectPlot')}
                   icon={<HomeIcon />}
                   options={plots.map(plot => ({
-                    value: plot.plotNumber,
+                    value: plot.id,
                     label: `${t('plot')} ${plot.plotNumber} - ${plot.address}`
                   }))}
                   formData={formData}

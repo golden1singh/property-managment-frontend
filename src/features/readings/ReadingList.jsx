@@ -14,61 +14,55 @@ import {
   CalendarIcon,
   BuildingOfficeIcon
 } from '@heroicons/react/24/outline'
+import { selectAllPlots } from '../plots/plotsSlice'
+import { useSelector } from 'react-redux'
 
 const ReadingList = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const plots = useSelector(selectAllPlots)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState('all')
   const [filterMonth, setFilterMonth] = useState('all')
   const [filterPlot, setFilterPlot] = useState('all')
-  const [plots, setPlots] = useState([])
+  // const [plots, setPlots] = useState([])
   const [readings, setReadings] = useState([])
   const [loading, setLoading] = useState(true)
+  console.log("-->",{plots})
 
-  // Fetch plots
-  useEffect(() => {
-    const fetchPlots = async () => {
-      try {
-        const response = await axiosInstance.get('/api/plots')
-        setPlots(response.data)
-      } catch (error) {
-        console.error('Error fetching plots:', error)
-        toast.error(t('errors.fetchPlots'))
-      }
-    }
 
-    fetchPlots()
-  }, [t])
 
   // Fetch utility bills
-  useEffect(() => {
-    const fetchReadings = async () => {
-      try {
-        const response = await axiosInstance.get('/api/utility-bills')
-        // Transform the data to match our component's needs
-        const transformedReadings = response.data.map(bill => ({
-          id: bill._id,
-          plotNumber: bill.plotNumber,
-          roomNumber: bill.roomNumber,
-          type: bill.billType,
-          date: bill.billDate,
-          previousReading: bill.previousReading,
-          currentReading: bill.currentReading,
-          unitsConsumed: bill.currentReading - bill.previousReading,
-          ratePerUnit: bill.ratePerUnit,
-          additionalCharges: bill.additionalCharges,
-          totalAmount: bill.totalAmount,
-          status: bill.status
-        }))
-        setReadings(transformedReadings)
-      } catch (error) {
-        console.error('Error fetching readings:', error)
-        toast.error(t('errors.fetchReadings'))
-      } finally {
-        setLoading(false)
-      }
+  const fetchReadings = async () => {
+    try {
+      const response = await axiosInstance.get('/api/utility-bills')
+
+      console.log({response})
+      // Transform the data to match our component's needs
+      const transformedReadings = response?.data?.bills?.map(bill => ({
+        id: bill._id,
+        plotNumber:bill?.roomNumber?.plotNumber?.plotNumber,
+        roomNumber: bill?.roomNumber?.roomNumber,
+        type: bill.billType,
+        date: bill.billDate,
+        previousReading: bill.previousReading,
+        currentReading: bill.currentReading,
+        unitsConsumed: bill.currentReading - bill.previousReading,
+        ratePerUnit: bill.ratePerUnit,
+        additionalCharges: bill.additionalCharges,
+        totalAmount: bill.totalAmount,
+        status: bill.status
+      }))
+      setReadings(transformedReadings)
+    } catch (error) {
+      console.error('Error fetching readings:', error)
+      toast.error(t('errors.fetchReadings'))
+    } finally {
+      setLoading(false)
     }
+  }
+  useEffect(() => {
+  
 
     fetchReadings()
   }, [t])
@@ -85,11 +79,11 @@ const ReadingList = () => {
         return null
     }
   }
-
+console.log({readings,filterPlot})
   const filteredReadings = readings.filter(reading => {
     const matchesSearch = 
-      reading.plotNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      reading.roomNumber.toLowerCase().includes(searchTerm.toLowerCase())
+      reading.plotNumber.includes(searchTerm.toLowerCase()) ||
+      reading.roomNumber.includes(searchTerm.toLowerCase())
     
     const matchesType = filterType === 'all' || reading.type === filterType
     
@@ -153,7 +147,7 @@ const ReadingList = () => {
             >
               <option value="all">{t('readings.allPlots')}</option>
               {plots.map(plot => (
-                <option key={plot._id} value={plot.plotNumber}>
+                <option key={plot.id} value={plot.plotNumber}>
                   {t('readings.plotWithNumber', { number: plot.plotNumber })}
                 </option>
               ))}

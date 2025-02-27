@@ -20,6 +20,7 @@ const RoomList = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedPlot, setSelectedPlot] = useState('all')
   const [filterStatus, setFilterStatus] = useState('all')
+  console.log("---->",plots)
 
   // Fetch plots and rooms
   useEffect(() => {
@@ -47,7 +48,7 @@ const RoomList = () => {
   // Organize rooms by plot
   const plotsWithRooms = plots.map(plot => ({
     ...plot,
-    rooms: rooms.filter(room => room.plotNumber === plot.plotNumber)
+    rooms: rooms.filter(room => room.plotNumber === plot.id)
       .filter(room => {
         const matchesSearch = 
           room.roomNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -56,7 +57,7 @@ const RoomList = () => {
         return matchesSearch && matchesStatus;
       })
   })).filter(plot => 
-    selectedPlot === 'all' || plot.plotNumber === selectedPlot
+    selectedPlot === 'all' || plot.id== selectedPlot
   );
 
   const renderDropdown = (value, onChange, options, placeholder) => (
@@ -132,7 +133,7 @@ const RoomList = () => {
                 <>
                   <option value="all" disabled>{t('allPlots')}</option>
                   {plots.map(plot => (
-                    <option key={plot._id} value={plot.plotNumber} className='text-black-600'>
+                    <option key={plot.id} value={plot.id} className='text-black-600'>
                       {t('plotNumber')} {`${plot.plotNumber}`}
                     </option>
                   ))}

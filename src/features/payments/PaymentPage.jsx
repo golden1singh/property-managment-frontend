@@ -21,6 +21,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Dialog } from '@headlessui/react'
 import * as XLSX from 'xlsx'
+import { useNavigate } from 'react-router-dom'
 
 import { toast } from 'react-toastify'
 
@@ -68,6 +69,8 @@ const PaymentPage = () => {
 
   // Add new state for payment type filter
   const [filterPaymentType, setFilterPaymentType] = useState('all')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchPayments()
@@ -225,7 +228,7 @@ console.log({payments})
     XLSX.utils.book_append_sheet(wb, ws, 'Payments')
     XLSX.writeFile(wb, `payments_${new Date().toISOString().split('T')[0]}.xlsx`)
   }
-// console.log({plots})
+console.log({plots ,selectedPlot})
   const PlotFilter = () => (
     <div className="relative">
       <select
@@ -241,7 +244,7 @@ console.log({payments})
         <option value="" disabled>{t('readings.allPlots')}</option>
         {plots.map(plot => (
          
-          <option key={plot._id} value={plot.plotNumber}>
+          <option key={plot.id} value={plot.id} >
             { t('plotNumber') }{` ${plot.plotNumber}`}
           </option>
         ))}
@@ -347,29 +350,45 @@ console.log({payments})
     }
   }
 
-  const handleUpdatePaymentStatus = async (paymentId, newStatus) => {
-    try {
-      await axiosInstance.patch(`/api/payments/${paymentId}/status`, {
-        status: newStatus
-      })
-      toast.success(t('success.statusUpdated'))
-      fetchPayments()
-    } catch (error) {
-      console.error('Error updating payment status:', error)
-      toast.error(t('errors.updateStatus'))
-    }
-  }
+  const handleUpdatePaymentStatus = (payment) => {
+    // Check payment type and navigate accordingly
+    console.log({payment})
+    switch (payment.type) {
+      case 'rent':
+        navigate(`/payments/${payment._id}`, {
+          state: {
+            paymentId: payment._id,
+            tenantId: payment.tenant?._id,
+            roomId: payment.room?._id,
+            paymentData: payment
+          }
+        });
+        break;
 
-  const handleDeletePayment = async (paymentId) => {
-    if (window.confirm(t('confirmations.deletePayment'))) {
-      try {
-        await axiosInstance.delete(`/api/payments/${paymentId}`)
-        toast.success(t('success.paymentDeleted'))
-        fetchPayments()
-      } catch (error) {
-        console.error('Error deleting payment:', error)
-        toast.error(t('errors.deletePayment'))
-      }
+      case 'utility':
+        navigate(`/readings/${payment.utilityBill._id}`, {
+          state: {
+            paymentId: payment._id,
+            tenantId: payment.tenant?._id,
+            roomId: payment.room?._id,
+            readingData: payment
+          }
+        });
+        break;
+
+      case 'deposit':
+        navigate(`/deposits/${payment._id}`, {
+          state: {
+            paymentId: payment._id,
+            tenantId: payment.tenant?._id,
+            roomId: payment.room?._id,
+            depositData: payment
+          }
+        });
+        break;
+
+      default:
+        toast.error(t('errors.invalidPaymentType'));
     }
   }
 
@@ -583,7 +602,7 @@ console.log({payments})
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {payments.map((payment) => (
+                  {payments?.map((payment) => (
                     <tr key={payment._id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -593,7 +612,7 @@ console.log({payments})
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {payment.room.roomNumber}
+                        {payment?.room?.roomNumber}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         ₹{payment.amount.toLocaleString()}
@@ -611,29 +630,34 @@ console.log({payments})
                         {t(`paymentType.${payment.type}`)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex space-x-2 justify-end">
+                        <div className="flex items-center space-x-4">
                           {payment.status === 'pending' && (
                             <>
                               <button
-                                onClick={() => handleUpdatePaymentStatus(payment._id, 'completed')}
-                                className="text-green-600 hover:text-green-900"
+                                onClick={() => handleUpdatePaymentStatus(payment)}
+                                className="text-green-600 hover:text-green-900 font-medium"
                               >
                                 {t('markComplete')}
                               </button>
+                              
                               <button
                                 onClick={() => handleSendReminder(payment.tenant._id, payment)}
-                                className="text-blue-600 hover:text-blue-900"
+                                className="flex items-center space-x-1 text-blue-600 hover:text-blue-900 
+                                  group relative"
                               >
                                 <BellIcon className="h-5 w-5" />
+                                <span className="text-sm">{t('sendReminder')}</span>
+                                
+                                {/* Tooltip */}
+                                <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 
+                                  bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 
+                                  group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                                  {t('sendPaymentReminder')}
+                                </span>
                               </button>
                             </>
                           )}
-                          <button
-                            onClick={() => handleDeletePayment(payment._id)}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            {t('delete')}
-                          </button>
+                          
                         </div>
                       </td>
                     </tr>

@@ -2,11 +2,18 @@ import { Fragment } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Dialog, Transition } from '@headlessui/react'
+import { 
+  HomeIcon, 
+  UsersIcon, 
+  CurrencyRupeeIcon,
+  ClipboardDocumentListIcon,
+  BuildingOfficeIcon,
+  ReceiptRefundIcon 
+} from '@heroicons/react/24/outline'
 
 import Logo from './Logo'
 import { navigation } from '../common/GlobalText'
 import MobileHeader from './MobileHeader'
-
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation()

@@ -278,7 +278,8 @@
     "reports": "रिपोर्ट",
     "utilities": "उपयोगिताएं",
     "settingsBar": "सेटिंग्स",
-    "readingsBar": "रीडिंग"
+    "readingsBar": "रीडिंग",
+    "rentCollection": "किराया संग्रह"
   },
   "addRoomTitle": "नया कमरा जोड़ें",
   "roomBasicInfo": "मूल जानकारी",
@@ -301,7 +302,8 @@
     "tenants": "किरायेदार",
     "readings": "मीटर रीडिंग",
     "payments": "भुगतान",
-    "settings": "सेटिंग्स"
+    "settings": "सेटिंग्स",
+    "rentCollection": "किराया संग्रह"
   },
   "furnishingStatus": "फर्निशिंग स्थिति",
   "furnishing": {
@@ -521,12 +523,7 @@
     "showing": "दिखाते हुए",
     "to": "से"
   },
-  "stats": {
-    "total": "Total",
-    "pending": "Pending",
-    "overdue": "Overdue",
-    "completed": "Completed"
-  },
+ 
   "markComplete": "भुगतान करें",
   "markOverdue": "भुगतान करें",
   "markPending": "भुगतान करें",
@@ -550,6 +547,35 @@
     "activeUsers": "सक्रिय उपयोगकर्ता",
     "propertiesManaged": "प्रबंधित संपत्तियां",
     "monthlyTransactions": "मासिक लेनदेन",
-    "customerSatisfaction": "ग्राहक संतुष्टि"
+    "customerSatisfaction": "ग्राहक संतुष्टि",
+    "total": "कुल",
+    "pending": "लंबित",
+    "overdue": "अवधि समाप्त",
+    "completed": "पूरा हो गया"
+  },
+  "sendReminder": "सूचना भेजें",
+  "sendPaymentReminder": "किरायेदार को भुगतान सूचना भेजें",
+  "rentCollection": {
+    "title": "किराया संग्रह",
+    "totalAmount": "कुल राशि",
+    "collected": "भुगतान किया",
+    "pending": "लंबित",
+    "month": "महीना",
+    "status": "स्थिति",
+    "searchPlaceholder": "किरायेदार या कमरा खोजें",
+    "room": "Room",
+    "tenant": "Tenant",
+    "amount": "Amount",
+    "dueDate": "Due Date",
+    "actions": "Actions",
+    "collect": "Collect",
+    "view": "View",
+    "statuses": {
+      "all": "सभी स्थिति",
+      "paid": "भुगतान किया",
+      "pending": "लंबित",
+      "overdue": "अवधि समाप्त"
+    },
+    "noPayments": "कोई भुगतान नहीं मिले"
   }
 }

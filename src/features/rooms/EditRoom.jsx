@@ -241,7 +241,7 @@ const EditRoom = () => {
               <>
                 <option value="">{t('selectPlot')}</option>
                 {plotsData.map(plot => (
-                  <option key={plot._id} value={plot.plotNumber}>
+                  <option key={plot.id} value={plot.id}>
                     {t('plotWithRooms', {
                       number: plot.plotNumber,
                       available: plot.totalRooms - plot.occupiedRooms,

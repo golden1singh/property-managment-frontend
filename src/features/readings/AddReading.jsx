@@ -112,7 +112,9 @@ const AddReading = () => {
     currentReading: '',
     ratePerUnit: '',
     additionalCharges: '',
-    notes: ''
+    notes: '',
+    roomId: '',
+    tenantId: ''
   })
 
   // Fetch plots
@@ -238,7 +240,9 @@ const AddReading = () => {
         previousReading: parseFloat(formData.previousReading),
         currentReading: parseFloat(formData.currentReading),
         ratePerUnit: parseFloat(formData.ratePerUnit),
-        additionalCharges: formData.additionalCharges ? parseFloat(formData.additionalCharges) : 0
+        additionalCharges: formData.additionalCharges ? parseFloat(formData.additionalCharges) : 0,
+        roomId: formData.roomId,
+        tenantId: formData.tenantId
       };
 
       const response = await axiosInstance.post('/api/utility-bills', payload);
@@ -261,7 +265,7 @@ const AddReading = () => {
     const total = amount + Number(formData.additionalCharges || 0)
     return total.toFixed(2)
   }
-
+console.log({rooms})
   return (
     <div className="min-h-screen bg-gray-50 py-6">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -298,7 +302,7 @@ const AddReading = () => {
                   required
                   placeholder={t('utilityBills.selectPlot')}
                   options={plots.map(plot => ({
-                    value: plot.plotNumber,
+                    value: plot.id,
                     label: t('utilityBills.plotWithNumber', { number: plot.plotNumber })
                   }))}
                 />
@@ -307,13 +311,25 @@ const AddReading = () => {
                   label={t('utilityBills.roomNumber')}
                   name="roomNumber"
                   value={formData.roomNumber}
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    const selectedRoom = rooms.find(room => room.roomNumber === e.target.value);
+                    setFormData(prev => ({
+                      ...prev,
+                      roomNumber: selectedRoom?._id,
+                      roomId: selectedRoom?._id,
+                      tenantId: selectedRoom?.tenant?._id
+                    }));
+                  }}
                   required
                   placeholder={t('utilityBills.selectRoom')}
-                  options={rooms.map(room => ({
-                    value: room.roomNumber,
-                    label: room.roomNumber
-                  }))}
+                  options={rooms
+                    .filter(room => room.currentTenant)
+                    .map(room => ({
+                      value: room.roomNumber,
+                      label: `Room ${room.roomNumber} - ${room.currentTenant?.firstName} ${room.currentTenant?.lastName}`,
+                      roomId: room._id,
+                      tenantId: room.currentTenant?._id
+                    }))}
                   disabled={!formData.plotNumber}
                 />
               </div>
