@@ -17,27 +17,27 @@ export default defineConfig({
           'vendor-ui': ['@material-tailwind/react', '@heroicons/react'],
           
           // Feature chunks
-          'feature-auth': ['./src/features/auth/LoginPage.jsx'],
-          'feature-dashboard': ['./src/features/dashboard/Dashboard.jsx'],
+          'feature-auth': ['./src/modules/auth/LoginPage.jsx'],
+          'feature-dashboard': ['./src/modules/dashboard/Dashboard.jsx'],
           'feature-tenants': [
-            './src/features/tenants/TenantListB.jsx',
-            './src/features/tenants/AddTenant.jsx',
-            './src/features/tenants/EditTenant.jsx',
-            './src/features/tenants/TenantDetails.jsx'
+            './src/modules/tenants/TenantListB.jsx',
+            './src/modules/tenants/AddTenant.jsx',
+            './src/modules/tenants/EditTenant.jsx',
+            './src/modules/tenants/TenantDetails.jsx'
           ],
           'feature-rooms': [
-            './src/features/rooms/RoomList.jsx',
-            './src/features/rooms/AddRoom.jsx',
-            './src/features/rooms/RoomDetail.jsx',
-            './src/features/rooms/EditRoom.jsx'
+            './src/modules/rooms/RoomList.jsx',
+            './src/modules/rooms/AddRoom.jsx',
+            './src/modules/rooms/RoomDetail.jsx',
+            './src/modules/rooms/EditRoom.jsx'
           ],
-          'feature-payments': ['./src/features/payments/PaymentPage.jsx'],
+          'feature-payments': ['./src/modules/payments/PaymentPage.jsx'],
           'feature-readings': [
-            './src/features/readings/ReadingList.jsx',
-            './src/features/readings/AddReading.jsx',
-            './src/features/readings/ReadingDetails.jsx'
+            './src/modules/readings/ReadingList.jsx',
+            './src/modules/readings/AddReading.jsx',
+            './src/modules/readings/ReadingDetails.jsx'
           ],
-          'feature-rent': ['./src/components/RentCollection/RentCollectionList.jsx']
+          'feature-rent': ['./src/modules/rent/RentCollectionList']
         }
       }
     }

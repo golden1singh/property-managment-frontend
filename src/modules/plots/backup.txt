@@ -21,24 +21,7 @@ const PlotManagement = () => {
   })
 
   // Sample data - replace with API data
-  const [plots, setPlots] = useState([
-    {
-      id: 1,
-      plotNumber: '129',
-      address: '123 Main Street, City',
-      totalRooms: 6,
-      occupiedRooms: 4,
-      description: 'Two story building'
-    },
-    {
-      id: 2,
-      plotNumber: '130',
-      address: '456 Park Avenue, City',
-      totalRooms: 8,
-      occupiedRooms: 6,
-      description: 'Three story building'
-    }
-  ])
+  const [plots, setPlots] = useState([])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -254,7 +237,7 @@ useEffect(() => {
         {/* Plots List */}
         <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-lg">
           <ul className="divide-y divide-gray-200">
-            {plots.map((plot) => (
+            {plots?.map((plot) => (
               <li key={plot.id} className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">

@@ -337,7 +337,7 @@ const handleAmenityToggle = (amenity) => {
              {/* Amenities */}
 <div className="mt-6">
   <label className="text-sm font-medium text-gray-700">
-    {t('amenities')}
+    {t('amenitiesList.title')}
   </label>
   <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
     {amenitiesOptions.map(amenity => (
@@ -352,7 +352,7 @@ const handleAmenityToggle = (amenity) => {
         </div>
         <div className="ml-3 text-sm">
           <label className="font-medium text-gray-700">
-            {t(`amenities.${amenity}`)}
+            {t(`amenitiesList.${amenity}`)}
           </label>
         </div>
       </div>

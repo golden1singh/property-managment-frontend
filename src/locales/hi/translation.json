@@ -316,7 +316,7 @@
     "occupied": "भरा हुआ",
     "maintenance": "मरम्मत के अधीन"
   },
-  "amenities": {
+  "amenitiesList": {
     "title": "सुविधाएं",
     "ac": "एयर कंडीशनिंग",
     "wifi": "वाई-फाई",
@@ -391,13 +391,24 @@
     "plotDeleted": "प्लॉट सफलतापूर्वक हटा दिया गया",
     "plotSaved": "प्लॉट सफलतापूर्वक सहेजा गया",
     "plotUpdated": "प्लॉट सफलतापूर्वक अपडेट किया गया",
-    "plotNumber": "प्लॉट नंबर"
+    "plotNumber": "प्लॉट नंबर",
+    "enterPlotNumber": "प्लॉट नंबर दर्ज करें",
+    "enterTotalRooms": "कुल कमरे दर्ज करें",
+    "enterAddress": "पूरा पता दर्ज करें",
+    "enterDescription": "प्लॉट विवरण (वैकल्पिक)",
+    "descriptionHelp": "प्लॉट और इसके सुविधाओं के बारे में एक लघु विवरण",
+    "noPlots": "कोई प्लॉट नहीं मिले",
+    "addPlotMessage": "पहले प्लॉट जोड़ने के लिए शुरू करें",
+    "listTitle": "प्लॉट सूची",
+    "listDescription": "प्लॉट और उनके विवरण प्रबंधित करें",
+    "totalPlots": "कुल प्लॉट"
   },
   "common": {
     "save": "सहेजें",
     "update": "अपडेट करें",
     "cancel": "रद्द करें",
-    "delete": "हटाएं"
+    "delete": "हटाएं",
+    "edit": "संपादित करें"
   },
   "backToRooms": "कमरे पर वापस जाएं",
   "currentTenant": "वर्तमान किरायेदार",
@@ -577,5 +588,16 @@
       "overdue": "अवधि समाप्त"
     },
     "noPayments": "कोई भुगतान नहीं मिले"
-  }
+  },
+  "roomsData": {
+    "statsLabel": {
+      "available": "उपलब्ध कमरे",
+      "occupied": "भरे हुए कमरे",
+      "maintenance": "मरम्मत में"
+    }
+  },
+  "tenant": "वर्तमान किरायेदार",
+  "noTenant": "किरायेदार नहीं बदला गया",
+  "perMonth": "प्रति माह",
+  "available": "उपलब्ध कमरा"
 }

@@ -317,7 +317,7 @@ const EditRoom = () => {
             {/* Amenities */}
             <div className="sm:col-span-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('amenities')}
+                {t('amenitiesList.title')}
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {amenitiesOptions.map(amenity => (
@@ -334,7 +334,7 @@ const EditRoom = () => {
                     </div>
                     <div className="ml-3 text-sm">
                       <label htmlFor={amenity} className="font-medium text-gray-700">
-                        {t(`amenities.${amenity}`)}
+                        {t(`amenitiesList.${amenity}`)}
                       </label>
                     </div>
                   </div>

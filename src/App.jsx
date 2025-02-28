@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { LanguageProvider } from './contexts/LanguageContext'
-import Header from './components/common/Header'
+import Header from './common/Header'
 import AppRoutes from './routes'
 import { ToastContainer } from 'react-toastify'
-import { fetchPlots, selectPlotsStatus } from './features/plots/plotsSlice'
+import { fetchPlots, selectPlotsStatus } from './modules/plots/plotsSlice'
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth)

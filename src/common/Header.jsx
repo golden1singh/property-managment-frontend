@@ -15,10 +15,10 @@ import {
   ChevronRightIcon,
   UserIcon
 } from '@heroicons/react/24/outline'
-import { useTheme } from '../../contexts/ThemeContext'
-import { useLanguage } from '../../contexts/LanguageContext'
+import { useTheme } from '../contexts/ThemeContext'
+import { useLanguage } from '../contexts/LanguageContext'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../features/auth/authSlice'
+import { logout } from '../modules/auth/authSlice'
 import MobileHeader from '../layout/MobileHeader'
 import { navigation as navigationlist } from './GlobalText'
 import React from 'react'

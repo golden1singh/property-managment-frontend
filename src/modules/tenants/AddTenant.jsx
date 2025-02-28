@@ -46,23 +46,25 @@ const AddTenant = () => {
   const [formData, setFormData] = useState(initialFormData);
   const { errors, touched, handleBlur, validateForm } = useFormValidation(initialFormData);
 
-  console.log({errors})
+  console.log({rooms})
   // Fetch available rooms
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await axiosInstance.get('/api/rooms?status=available');
-        console.log('Fetched rooms:', response.data);
-        console.log('Room data type:', typeof response.data);
-        console.log('Is array?', Array.isArray(response.data));
-        setRooms(response.data);
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-        toast.error(t('errorFetchingRooms'));
-      }
-    };
-    fetchRooms();
-  }, [t]);
+  // const fetchRooms = async () => {
+  //   try {
+  //     debugger
+  //     const response = await axiosInstance.get('/api/rooms?status=available');
+  //     console.log('Fetched rooms:', response.data);
+  //     console.log('Room data type:', typeof response.data);
+  //     console.log('Is array?', Array.isArray(response.data));
+  //     setRooms(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching rooms:', error);
+  //     toast.error(t('errorFetchingRooms'));
+  //   }
+  // };
+  // useEffect(() => {
+   
+  //   fetchRooms();
+  // }, [t]);
 
   // Fetch plots when component mounts
   useEffect(() => {
@@ -79,39 +81,41 @@ const AddTenant = () => {
   }, [t]);
 
   // Fetch rooms when plot is selected
-  useEffect(() => {
-    const fetchRooms = async () => {
-      if (!selectedPlot) {
-        setRooms([]);
-        return;
-      }
+  const fetchRooms = async () => {
+    if (!selectedPlot) {
+      setRooms([]);
+      return;
+    }
+    
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(`/api/plots/${selectedPlot}/rooms?status=available`);
+      console.log('API Response:', response.data); // Debug log
       
-      try {
-        setLoading(true);
-        const response = await axiosInstance.get(`/api/plots/${selectedPlot}/rooms?status=available`);
-        console.log('API Response:', response.data); // Debug log
-        
-        // Ensure we're setting an array of rooms
-        const roomsData = Array.isArray(response.data) ? response.data : [];
-        
-        // Validate and transform room data
-        const validRooms = roomsData.map(room => ({
-          _id: room._id || '',
-          roomNumber: String(room.roomNumber || ''),
-          floor: String(room.floor || ''),
-          rent: String(room.rent || ''),
-          securityDeposit: String(room.securityDeposit || '')
-        }));
-        
-        setRooms(validRooms);
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-        toast.error(t('errorFetchingRooms'));
-        setRooms([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+      // Ensure we're setting an array of rooms
+      const roomsData = Array.isArray(response.data) ? response.data : [];
+      
+      // Validate and transform room data
+      const validRooms = roomsData.map(room => ({
+        _id: room._id || '',
+        roomNumber: String(room.roomNumber || ''),
+        floor: String(room.floor || ''),
+        rent: String(room.rent || ''),
+        securityDeposit: String(room.securityDeposit || ''),
+        type: String(room.type || '')
+      }));
+      
+      setRooms(validRooms);
+    } catch (error) {
+      console.error('Error fetching rooms:', error);
+      toast.error(t('errorFetchingRooms'));
+      setRooms([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+   
     fetchRooms();
   }, [selectedPlot, t]);
 
@@ -361,7 +365,7 @@ const AddTenant = () => {
                   name="roomNumber"
                   label={t('selectRoom')}
                   icon={<HomeIcon />}
-                  options={rooms.map(room => ({
+                  options={rooms?.map(room => ({
                     value: room.roomNumber,
                     label: `${t('room')} ${room.roomNumber} - ${room.type} (₹${room.rent}/month)`
                   }))}

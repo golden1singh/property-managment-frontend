@@ -13,12 +13,15 @@ import {
   PencilIcon
 } from '@heroicons/react/24/outline';
 import axiosInstance from '../../utils/axios';
+import { useSelector } from 'react-redux';
 
 const RoomDetail = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [room, setRoom] = useState(null);
+  const plots = useSelector(state => state.plots.plots)
+  console.log({plots})
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const fetchRoomDetails = async () => {
@@ -97,10 +100,10 @@ const RoomDetail = () => {
           <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900">
-                {t('roomNumber', { number: room.roomNumber })}
+                {t('roomNumber')} {room.roomNumber}
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                {t('plotNumber', { number: room.plotNumber })}
+                {t('plotNumber')} {plots?.find(p => p.id === room.plotNumber)?.plotNumber}
               </p>
             </div>
             <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
@@ -159,14 +162,14 @@ const RoomDetail = () => {
 
             {/* Amenities */}
             <div className="mt-6">
-              <h4 className="text-sm font-medium text-gray-500">{t('amenities')}</h4>
+              <h4 className="text-sm font-medium text-gray-500">{t('amenitiesList.title')}</h4>
               <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {room.amenities.map(amenity => (
                   <span
                     key={amenity}
                     className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
                   >
-                    {t(`amenities.${amenity}`)}
+                    {t(`amenitiesList.${amenity}`)}
                   </span>
                 ))}
               </div>

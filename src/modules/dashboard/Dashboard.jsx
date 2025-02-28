@@ -23,7 +23,7 @@ import {
   ArcElement
 } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
-import ServiceCard from '../../components/common/ServiceCard';
+import ServiceCard from '../../common/ServiceCard';
 import axiosInstance from '../../utils/axios';
 
 ChartJS.register(

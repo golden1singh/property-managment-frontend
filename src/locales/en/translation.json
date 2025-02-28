@@ -23,12 +23,12 @@
     "printing": "Printing",
     "language": "Language",
     "security": "Security",
-    
+
     "profileSettings": "Profile Settings",
     "name": "Full Name",
     "email": "Email Address",
     "phone": "Phone Number",
-    
+
     "notificationSettings": "Notification Settings",
     "emailNotifications": "Email Notifications",
     "pushNotifications": "Push Notifications",
@@ -36,13 +36,13 @@
     "paymentReceipts": "Payment Receipts",
     "maintenanceAlerts": "Maintenance Alerts",
     "leaseExpiryAlerts": "Lease Expiry Alerts",
-    
+
     "propertySettings": "Property Settings",
     "propertyName": "Property Name",
     "propertyAddress": "Property Address",
     "gstNumber": "GST Number",
     "panNumber": "PAN Number",
-    
+
     "billingSettings": "Billing Settings",
     "lateFeePercentage": "Late Fee Percentage",
     "gracePeriod": "Grace Period (Days)",
@@ -51,25 +51,25 @@
     "electricityRate": "Electricity Rate (per unit)",
     "waterRate": "Water Rate (per unit)",
     "maintenanceCharge": "Maintenance Charge",
-    
+
     "documentSettings": "Document Settings",
     "agreementTemplate": "Agreement Template",
     "receiptTemplate": "Receipt Template",
     "letterheadLogo": "Letterhead Logo",
     "uploadDocument": "Upload Document",
     "removeDocument": "Remove Document",
-    
+
     "printingSettings": "Printing Settings",
     "includeLetterhead": "Include Letterhead",
     "includeQR": "Include QR Code",
     "autoEmail": "Auto-send Email",
     "paperSize": "Paper Size",
-    
+
     "languageSettings": "Language Settings",
     "selectLanguage": "Select Language",
     "english": "English",
     "hindi": "Hindi",
-    
+
     "securitySettings": "Security Settings",
     "changePassword": "Change Password",
     "currentPassword": "Current Password",
@@ -77,7 +77,7 @@
     "confirmPassword": "Confirm Password",
     "twoFactorAuth": "Two-Factor Authentication",
     "loginHistory": "Login History",
-    
+
     "actions": {
       "save": "Save Changes",
       "cancel": "Cancel",
@@ -169,7 +169,7 @@
   "analytics": "Analytics & Insights",
   "analyticsDesc": "Get detailed insights and reports about your properties",
   "security": "Security",
-  "securityDesc": "Advanced security features to protect your data",
+  "securityDesc": "Advanced security modules to protect your data",
   "reporting": "Reporting",
   "reportingDesc": "Generate comprehensive reports and statements",
   "activeUsers": "Active Users",
@@ -181,7 +181,7 @@
   "featuresDescription": "Our comprehensive property management solution provides all the tools you need to efficiently manage your properties and tenants.",
   "testimonials": "Testimonials",
   "testimonialsTitle": "What our customers say",
-  "testimonial1": "This platform has revolutionized how I manage my properties. The automation and organization features save me hours every week.",
+  "testimonial1": "This platform has revolutionized how I manage my properties. The automation and organization modules save me hours every week.",
   "testimonial2": "The reporting and analytics tools help me make better decisions for my property portfolio. Highly recommended!",
   "propertyOwner": "Property Owner",
   "propertyManager": "Property Manager",
@@ -195,8 +195,8 @@
   "guides": "Guides",
   "allRightsReserved": "All rights reserved",
   "login": "Login",
- 
-  "features": {
+
+  "modules": {
     "title": "Everything you need",
     "subtitle": "Manage your properties with ease",
     "description": "Our comprehensive property management solution provides all the tools you need to efficiently manage your properties and tenants.",
@@ -229,7 +229,7 @@
     "title": "What our customers say",
     "subtitle": "Trusted by property managers across India",
     "testimonial1": {
-      "content": "This platform has revolutionized how I manage my properties. The automation features save me hours every week.",
+      "content": "This platform has revolutionized how I manage my properties. The automation modules save me hours every week.",
       "author": "Rajesh Kumar",
       "role": "Property Owner"
     },
@@ -255,7 +255,7 @@
   "pageNotFound": "Page not found",
   "pageNotFoundDesc": "Please check the URL or go back to the homepage.",
   "backToHome": "Back to Homepage",
-  
+
   "reportsTitle": "Reports & Analytics",
   "reportsFinancial": "Financial Reports",
   "reportsFinancialDesc": "Revenue, expenses, and cash flow analysis",
@@ -415,7 +415,7 @@
     "occupied": "Occupied",
     "maintenance": "Under Maintenance"
   },
-  "amenities": {
+  "amenitiesList": {
     "title": "Amenities",
     "ac": "Air Conditioning",
     "wifi": "Wi-Fi",
@@ -536,7 +536,17 @@
     "plotDeleted": "Plot deleted successfully",
     "plotSaved": "Plot saved successfully",
     "plotUpdated": "Plot updated successfully",
-    "plotNumber": "Plot Number"
+    "plotNumber": "Plot Number",
+    "enterPlotNumber": "Enter plot number",
+    "enterTotalRooms": "Enter total number of rooms",
+    "enterAddress": "Enter complete address",
+    "enterDescription": "Enter plot description (optional)",
+    "descriptionHelp": "Brief description about the plot and its features",
+    "noPlots": "No plots found",
+    "addPlotMessage": "Get started by adding your first plot",
+    "listTitle": "Plot List",
+    "listDescription": "Manage your plots and their details",
+    "totalPlots": "Total plots"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -552,6 +562,7 @@
     "save": "Save",
     "update": "Update",
     "cancel": "Cancel",
+    "edit": "Edit",
     "delete": "Delete"
   },
   "backToRooms": "Back to Rooms",
@@ -563,19 +574,19 @@
   "noRoomsAvailable": "No rooms available",
   "noRoomsFound": "No rooms found",
 
-    "maintenanceHistory": "Maintenance History",
-    "issue": "Issue",
-    "reportedDate": "Reported Date",
-    "resolvedDate": "Resolved Date",
-    "cost": "Cost",
-    "maintenanceStatus": {
-      "pending": "Pending",
-      "in_progress": "In Progress",
-      "resolved": "Resolved"
-    },
-    "floor": "Floor",
-    "floorNumber": "Floor {{number}}",
-    "editRoom": "Edit Room",
+  "maintenanceHistory": "Maintenance History",
+  "issue": "Issue",
+  "reportedDate": "Reported Date",
+  "resolvedDate": "Resolved Date",
+  "cost": "Cost",
+  "maintenanceStatus": {
+    "pending": "Pending",
+    "in_progress": "In Progress",
+    "resolved": "Resolved"
+  },
+  "floor": "Floor",
+  "floorNumber": "Floor {{number}}",
+  "editRoom": "Edit Room",
   "roomUpdatedSuccess": "Room updated successfully",
   "errorUpdatingRoom": "Error updating room",
   "existingImages": "Existing Images",
@@ -637,12 +648,12 @@
   "fileTooLarge": "File size should be less than 5MB",
   "futureDateOnly": "Only future dates are allowed",
   "joinDate": "Join Date",
-  
-    "confirmRemoveTenant": "Are you sure you want to remove this tenant? This will mark the tenant as inactive and make their room available.",
-    "tenantRemoved": "Tenant removed successfully and room marked as available",
-    "errorRemovingTenant": "Error removing tenant. Please try again.",
-    "tenantAlreadyRemoved": "This tenant is already removed",
-    "tenantNotFound": "Tenant not found",
+
+  "confirmRemoveTenant": "Are you sure you want to remove this tenant? This will mark the tenant as inactive and make their room available.",
+  "tenantRemoved": "Tenant removed successfully and room marked as available",
+  "errorRemovingTenant": "Error removing tenant. Please try again.",
+  "tenantAlreadyRemoved": "This tenant is already removed",
+  "tenantNotFound": "Tenant not found",
   "saveTenant": "Save Tenant",
   "pleaseFixErrors": "Please fix the errors in the form before submitting.",
   "existingDocuments": "Existing Documents",
@@ -732,7 +743,7 @@
     "showing": "Showing",
     "to": "to"
   },
- 
+
   "markComplete": "Mark as Paid",
   "markOverdue": "Mark as Overdue",
   "markPending": "Mark as Pending",
@@ -774,7 +785,17 @@
   },
 
   "sendReminder": "Send Reminder",
-  "sendPaymentReminder": "Send payment reminder to tenant"
-
-  
-} 
+  "sendPaymentReminder": "Send payment reminder to tenant",
+  "roomsData": {
+    "statsLabel": {
+      "available": "Available Rooms",
+      "occupied": "Occupied Rooms",
+      "maintenance": "Under Maintenance"
+    },
+    "tenant": "Current Tenant",
+  "noTenant": "No tenant assigned",
+  "perMonth": "per month",
+  "available": "Ready to Rent"
+  },
+  "roomNumber": "Room Number"
+}

@@ -17,30 +17,32 @@ import {
   PhoneIcon,
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
+import { useSelector } from 'react-redux';
 
 const ReadingDetails = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { paymentId, tenantId, roomId, paymentData } = location.state;
+  // const { paymentId, tenantId, roomId, paymentData } = location.state;
   const [loading, setLoading] = useState(true);
   const [reading, setReading] = useState(null);
   const [processingPayment, setProcessingPayment] = useState(false);
+const plots=useSelector(state=>state.plots.plots)
+
+  const fetchReadingDetails = async () => {
+    try {
+      const response = await axiosInstance.get(`/api/utility-bills/${id}`);
+      setReading(response.data);
+    } catch (error) {
+      console.error('Error fetching reading details:', error);
+      toast.error(t('errors.fetchReadingDetails'));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchReadingDetails = async () => {
-      try {
-        const response = await axiosInstance.get(`/api/utility-bills/${id}`);
-        setReading(response.data);
-      } catch (error) {
-        console.error('Error fetching reading details:', error);
-        toast.error(t('errors.fetchReadingDetails'));
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchReadingDetails();
   }, [id, t]);
 
@@ -82,7 +84,7 @@ const ReadingDetails = () => {
       </div>
     );
   }
-
+console.log({reading})
   return (
     <div className="min-h-screen bg-gray-50 py-6">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,8 +117,8 @@ const ReadingDetails = () => {
                       <BuildingOfficeIcon className="h-4 w-4" />
                       <span>
                         {t('readings.plotRoom', {
-                          plot: reading.plotNumber,
-                          room: reading.roomNumber
+                          plot:plots?.find(p => p.id === reading.plotNumber)?.plotNumber,
+                          room: reading?.roomNumber?.roomNumber
                         })}
                       </span>
                     </div>
