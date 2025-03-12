@@ -359,7 +359,7 @@
     "invalidPan": "Please enter a valid PAN number"
   },
   "messages": {
-    "tenantAddedSuccess": "Tenant added successfully",
+    "tenantAddedSuccess": "Tenant added successfully!!!",
     "errorAddingTenant": "Error adding tenant",
     "errorFetchingRooms": "Error fetching available rooms",
     "photoSizeError": "Photo size should be less than 5MB",
