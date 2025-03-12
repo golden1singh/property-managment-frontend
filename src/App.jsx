@@ -13,10 +13,10 @@ function App() {
   const plotsStatus = useSelector(selectPlotsStatus)
 
   useEffect(() => {
-    if (plotsStatus === 'idle') {
+    if (plotsStatus === 'idle' && isAuthenticated) {
       dispatch(fetchPlots())
     }
-  }, [dispatch, plotsStatus])
+  }, [dispatch, plotsStatus, isAuthenticated])
 
   return (
     <ThemeProvider>

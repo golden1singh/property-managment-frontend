@@ -20,38 +20,38 @@ const LandingPage = () => {
 
   const features = [
     {
-      title: t('features.propertyManagement.title'),
-      description: t('features.propertyManagement.description'),
+      title: t('modules.propertyManagement.title'),
+      description: t('modules.propertyManagement.description'),
       icon: HomeIcon,
       color: 'bg-blue-100 text-blue-600'
     },
     {
-      title: t('features.tenantTracking.title'),
-      description: t('features.tenantTracking.description'),
+      title: t('modules.tenantTracking.title'),
+      description: t('modules.tenantTracking.description'),
       icon: UserGroupIcon,
       color: 'bg-green-100 text-green-600'
     },
     {
-      title: t('features.paymentProcessing.title'),
-      description: t('features.paymentProcessing.description'),
+      title: t('modules.paymentProcessing.title'),
+      description: t('modules.paymentProcessing.description'),
       icon: CurrencyRupeeIcon,
       color: 'bg-purple-100 text-purple-600'
     },
     {
-      title: t('features.analytics.title'),
-      description: t('features.analytics.description'),
+      title: t('modules.analytics.title'),
+      description: t('modules.analytics.description'),
       icon: ChartBarIcon,
       color: 'bg-orange-100 text-orange-600'
     },
     {
-      title: t('features.security.title'),
-      description: t('features.security.description'),
+      title: t('modules.security.title'),
+      description: t('modules.security.description'),
       icon: ShieldCheckIcon,
       color: 'bg-red-100 text-red-600'
     },
     {
-      title: t('features.reporting.title'),
-      description: t('features.reporting.description'),
+      title: t('modules.reporting.title'),
+      description: t('modules.reporting.description'),
       icon: DocumentChartBarIcon,
       color: 'bg-teal-100 text-teal-600'
     }
